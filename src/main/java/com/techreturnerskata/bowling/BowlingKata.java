@@ -1,6 +1,4 @@
-package com.techreturnerskata;
-
-import java.util.Random;
+package com.techreturnerskata.bowling;
 
 public class BowlingKata {
     private boolean isStrike;
@@ -23,13 +21,11 @@ public class BowlingKata {
     }
 
 
-
     private int knockPins(int max) {
-       int min=0;
-        int randomValue =0;
-             randomValue = (int) (Math.random()*(max-min)) + min;
-            System.out.println(randomValue);
-        return max-randomValue;
+        int min = 0;
+        int randomValue = (int) (Math.random() * (max - min)) + min;
+        System.out.println(randomValue);
+        return max - randomValue;
     }
 /*Each game, or “line” of bowling, includes ten turns, or “frames” for the bowler.
 In each frame, the bowler gets up to two tries to knock down all 10 pins.

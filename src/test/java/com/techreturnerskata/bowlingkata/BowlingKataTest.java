@@ -1,11 +1,9 @@
-package com.techreturnerskata.bowling;
+package com.techreturnerskata.bowlingkata;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import com.techreturnerskata.bowling.BowlingKata;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BowlingKataTest {
 
