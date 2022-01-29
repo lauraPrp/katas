@@ -1,41 +1,61 @@
 package com.techreturnerskata.bowling;
 
 public class BowlingKata {
-    private boolean isStrike;
-    private boolean isSpare;
+    private final int[] rolls = new int[22];
+    private int currentRoll = 0;
 
-    public int randomNumberSmallerthan10(int pins) {
-        return knockPins(pins);
-        // 10 lines/frames, 2 rounds each
-       /* for(int i=0;i<10;i++){
-            //10 frames
-            int pinsAvailable =10;
-            for(int y=0;y<2;i++){
-                pinsAvailable = knockPins(pinsAvailable);
+
+    /*Each game has 10 turns of 2 rolls
+     * score:
+     * -strike :if all 10 pins are knocked down in a single roll, score is the sum of current and next turns
+     * - spare: if all 10 pins are knocked in a single turn but 2 rolls, score is the sum of current turn + the very next roll
+     * on last 10th turn:
+     *if spare is achieved player gets an additional roll
+     *if strike is achieved player gets 2 additional rolls
+     * */
+
+
+    public void roll(int pins) {
+        rolls[currentRoll] = pins;
+        currentRoll++;
+    }
+
+    public int score() {
+        int score = 0;
+        int rollIndex = 0;
+
+        for (int frame = 0; frame < 10; frame++) {
+            if (isStrike(rollIndex)) {
+                score += strikeScore(rollIndex);
+                rollIndex++;
+            } else if (isSpare(rollIndex)) {
+                score += spareScore(rollIndex);
+                rollIndex += 2;
+            } else {
+                score += normalScore(rollIndex);
+                rollIndex += 2;
             }
-
         }
-
-              int pinNumberKnocked = 0;
-        return 1;*/
+        return score;
     }
 
-
-    private int knockPins(int max) {
-        int min = 0;
-        int randomValue = (int) (Math.random() * (max - min)) + min;
-        System.out.println(randomValue);
-        return max - randomValue;
+    private boolean isStrike(int rollIndex) {
+        return rolls[rollIndex] == 10;
     }
-/*Each game, or “line” of bowling, includes ten turns, or “frames” for the bowler.
-In each frame, the bowler gets up to two tries to knock down all 10 pins.
-If in two tries, he fails to knock them all down, his score for that frame is the total number of pins knocked down in his two tries.
-If in two tries he knocks them all down,
-this is called a “spare” and his score for the frame is ten plus the number of pins knocked down on his next throw (in his next turn).
-If on his first try in the frame he knocks down all the pins, this is called a “strike”.
-His turn is over, and his score for the frame is ten plus the simple total of the pins knocked down in his next two rolls.
-If he gets a spare or strike in the last (tenth) frame, the bowler gets to throw one or two more bonus balls, respectively.
-These bonus throws are taken as part of the same turn. If the bonus throws knock down all the pins, the process does not repeat: the bonus throws are only used to calculate the score of the final frame.
-The game score is the total of all frame scores.*/
 
+    private boolean isSpare(int rollIndex) {
+        return rolls[rollIndex] + rolls[rollIndex + 1] == 10;
+    }
+
+    private int normalScore(int rollIndex) {
+        return rolls[rollIndex] + rolls[rollIndex + 1];
+    }
+
+    private int strikeScore(int rollIndex) {
+        return normalScore(rollIndex) + rolls[rollIndex + 2];
+    }
+
+    private int spareScore(int rollIndex) {
+        return normalScore(rollIndex) + rolls[rollIndex + 2];
+    }
 }
