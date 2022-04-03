@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public class HighestScoringWord {
-    final static String[] alphabet = {"", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+    static final String[] alphabet = {"", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
 
     public static List<String> split(String str) {
         return Stream.of(str.split(" "))
